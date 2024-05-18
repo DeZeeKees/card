@@ -1,0 +1,247 @@
+@import './theme-toggle.css';
+
+:root {
+
+    /* Colors */
+    --primary-light: #FFAB91;
+    --secondary-light: #FF8A65;
+    --background-light: #ffb296;
+    --card-light: #FFF;
+    --content-light: #FFCCBC;
+
+    --primary-dark: #ffbfa7;
+    --secondary-dark: #ff8a65;
+    --background-dark: #513329;
+    --card-dark: #63473d;
+    --content-dark: #765c53;
+
+    /* semi dark color for light theme */
+    --text-light: #37474F;
+    --text-dark: #FFF;
+
+    --button-text-light: #2d2d47;
+    --button-text-dark: #2d2d47;
+
+    /* Etc */
+
+    --transition-time: 0.2s;
+    --border-radius: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--content);
+}
+
+body {
+    --primary: var(--primary-light);
+    --secondary: var(--secondary-light);
+    --background: var(--background-light);
+    --text: var(--text-light);
+    --card: var(--card-light);
+    --button-text: var(--button-text-light);
+    --content: var(--content-light);
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--background);
+    font-size: 100%;
+    transition: background-color var(--transition-time) ease-in-out;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    width: 100vw;
+
+    padding-inline: 10px;
+}
+
+.no-transition {
+    transition: none !important;
+}
+
+body.dark {
+    --primary: var(--primary-dark);
+    --secondary: var(--secondary-dark);
+    --background: var(--background-dark);
+    --text: var(--text-dark);
+    --card: var(--card-dark);
+    --button-text: var(--button-text-dark);
+    --content: var(--content-dark);
+}
+
+main {
+    max-width: 1000px;
+    width: 100%;
+    padding: 20px;
+
+    background: var(--card);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    display: grid;
+    gap: 20px;
+    grid-template-areas:
+    "top top"
+    "nav content";
+
+    grid-template-columns: 1fr 3fr;
+
+    transition: background-color var(--transition-time) ease-in-out;
+}
+
+@media screen and (max-width: 600px) {
+    main {
+        grid-template-areas:
+        "top"
+        "nav"
+        "content";
+        grid-template-columns: 1fr;
+    }
+}
+
+h1, h2, h3, h4, h5, h6, p, a {
+    color: var(--text);
+    transition: color var(--transition-time) ease-in-out;
+}
+
+a:hover {
+    color: var(--primary);
+}
+
+main .top {
+    grid-area: top;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main .top .user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+main .top img.pfp {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+main nav {
+    grid-area: nav;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+main nav.non-clickable {
+    pointer-events: none;
+}
+
+main nav a {
+    background: transparent;
+    color: var(--text);
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    text-decoration: none;
+    border-radius: 100px;
+    cursor: pointer;
+    font-weight: bold;
+    transition:
+        background-color var(--transition-time) ease-in-out,
+        color var(--transition-time) ease-in-out;
+}
+
+main nav a:hover {
+    background: var(--primary);
+    color: var(--button-text);
+}
+
+main nav a.active {
+    background: var(--primary);
+    color: var(--button-text);
+}
+
+main .content {
+    grid-area: content;
+    background-color: var(--content);
+    border-radius: var(--border-radius);
+    height: 450px;
+    
+    position: relative;
+    overflow-x: hidden;
+
+    transition: background-color var(--transition-time) ease-in-out;
+}
+
+main .content > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+
+    overflow-y: scroll;
+
+    transition: transform var(--transition-time) ease-in-out;
+}
+
+main .content div.old {
+    transform: translateX(100%);
+}
+
+main .content div.new {
+    transform: translateX(-100%);
+}
+
+.multiline-text {
+    word-wrap: break-word;
+    white-space: pre-line;
+}
+
+.image {
+    height: 400px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+.socials {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+a.social {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--primary);
+    color: var(--button-text);
+    padding: 10px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background-color var(--transition-time) ease-in-out;
+}
+
+a.social:hover {
+    background: var(--secondary);
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}

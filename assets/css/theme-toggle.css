@@ -1,0 +1,42 @@
+.theme-toggle {
+    display: block;
+    width: 80px;
+    padding: 2.5px;
+    cursor: pointer;
+    background-color: var(--primary);
+    border-radius: 50px;
+    transition: background-color var(--transition-time) ease-in-out;
+    position: relative;
+}
+
+.theme-toggle .handle {
+    width: 35px;
+    height: 35px;
+    background-color: var(--secondary);
+    border-radius: 50%;
+    transition:
+        background-color var(--transition-time) ease-in-out,
+        transform var(--transition-time) ease-in-out;
+    z-index: 1;
+    position: relative;
+}
+
+.theme-toggle > img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0;
+    color: var(--text);
+}
+
+.theme-toggle > img.dark {
+    left: 8px;
+}
+
+.theme-toggle > img.light {
+    right: 8px;
+}
+
+.theme-toggle > input:checked + .handle {
+    transform: translateX(39.5px);
+}
